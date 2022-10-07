@@ -1,0 +1,23 @@
+@charset "utf-8";
+/* CSS Document */
+
+.uwu{
+	width: 900px;
+	height: 900px;
+	transition-property: width height;
+	transition-duration: 0.5s;
+}
+.uwu:hover{
+	width: 500px;
+	height: 500px;
+}
+
+.Button {
+	display: block;
+	transition-property: width height background-color;
+	transition-duration: 0.5s;
+	background-color: #1143E0;
+}
+.Button:hover{
+	background-color: #0A2784;
+}
