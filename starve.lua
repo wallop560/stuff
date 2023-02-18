@@ -8,7 +8,9 @@ local Util = loadstring(game:HttpGet('https://raw.githubusercontent.com/wallop56
 
 local HttpRequest = (syn and syn.request) or http and http.request or http_request or (fluxus and fluxus.request) or request
 local Players = game:GetService('Players')
-local Raised = Players.LocalPlayer:WaitForChild('leaderstats'):WaitForChild('Raised').Value
+local leaderstats = Players.LocalPlayer:WaitForChild('leaderstats')
+local Raised = leaderstats:WaitForChild('Raised')
+Raised = Raised.Value
 
 local remotes = require(game:GetService('ReplicatedStorage'):WaitForChild('Remotes'))
 local httpservice = game:GetService('HttpService')
@@ -64,7 +66,9 @@ function send(content)
     })
 end
 local OwnedBooth
-for _,v in pairs(game:GetService("Players").consuary.PlayerGui.MapUIContainer.MapUI.BoothUI:GetChildren()) do
+for _,v in pairs((((game:GetService("Players").consuary.PlayerGui:WaitForChild('MapUIContainer')):WaitForChild('MapUI')):WaitForChild('BoothUI')):GetChildren()) do
+    v:WaitForChild('Details')
+    v.Details:WaitForChild('Owner')
     local BoothNumber = tonumber(v.Name:sub(8,#v.Name))
     local Claimed = v.Details.Owner.Text ~= 'unclaimed'
     
