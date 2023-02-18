@@ -1,3 +1,4 @@
+repeat wait() until game:IsLoaded()
 local InactivityForServerHop = getgenv().ServerHopTime
 
 local BoothTxt = getgenv().BoothMsg
@@ -7,7 +8,7 @@ local Util = loadstring(game:HttpGet('https://raw.githubusercontent.com/wallop56
 
 local HttpRequest = (syn and syn.request) or http and http.request or http_request or (fluxus and fluxus.request) or request
 local Players = game:GetService('Players')
-local Raised = Players.LocalPlayer.leaderstats.Raised.Value
+local Raised = Players.LocalPlayer:WaitForChild('leaderstats'):WaitForChild('Raised').Value
 
 local remotes = require(game:GetService('ReplicatedStorage'):WaitForChild('Remotes'))
 local httpservice = game:GetService('HttpService')
@@ -101,13 +102,13 @@ Players.LocalPlayer.leaderstats.Raised.Changed:Connect(function()
 end)
 
 local function serverhop()
-    MinimumPeople = 20
+    local MinimumPeople = 20
     local TotalServers = Util.GetServers(game.PlaceId)
 
     local ViableServers = {}
 
     for _,Server in next,TotalServers do
-        if Server.playing >= MinimumPeople then
+        if Server and Server.playing >= MinimumPeople then
             table.insert(ViableServers,Server)
         end
     end
@@ -115,7 +116,7 @@ local function serverhop()
     local RandomServer = ViableServers[RandomIndex]
 
     local ServerId = RandomServer.id
-    syn.queue_on_teleport('getgenv().BoothMsg = "'..BoothTxt..'";getgenv().ServerHopTime = '..InactivityForServerHop..';getgenv().webhook; \n loadstring(game:HttpGet("https://raw.githubusercontent.com/wallop560/stuff/main/starve.lua"))()')
+    syn.queue_on_teleport('getgenv().BoothMsg = "'..BoothTxt..'" getgenv().ServerHopTime = '..InactivityForServerHop..' getgenv().webhook = "'..getgenv().webhook..'" loadstring(game:HttpGet("https://raw.githubusercontent.com/wallop560/stuff/main/starve.lua"))()')
     TPS:TeleportToPlaceInstance(game.PlaceId,ServerId,Players.LocalPlayer)
 end
 
