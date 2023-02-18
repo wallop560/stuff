@@ -126,7 +126,7 @@ game.Players.LocalPlayer.Idled:Connect(function()
     VU:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 end)
 
-send('test')
+send('Joined new server.')
 
 spawn(function()
     while wait(math.random(30,40)) do
