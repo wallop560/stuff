@@ -1,4 +1,5 @@
 repeat wait() until game:IsLoaded()
+print('v1.15')
 local InactivityForServerHop = getgenv().ServerHopTime
 
 local BoothTxt = getgenv().BoothMsg
@@ -112,7 +113,7 @@ local function serverhop()
     local ViableServers = {}
 
     for _,Server in next,TotalServers do
-        if Server and Server.playing >= MinimumPeople then
+        if Server and Server.playing and Server.playing >= MinimumPeople then
             table.insert(ViableServers,Server)
         end
     end
