@@ -115,7 +115,7 @@ local function serverhop()
     local RandomServer = ViableServers[RandomIndex]
 
     local ServerId = RandomServer.id
-
+    ((syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport))('getgenv().BoothMsg = "'..BoothTxt..'";getgenv().ServerHopTime = '..InactivityForServerHop..';getgenv().webhook; \n loadstring(game:HttpGet("https://raw.githubusercontent.com/wallop560/stuff/main/starve.lua"))()')
     TPS:TeleportToPlaceInstance(game.PlaceId,ServerId,Players.LocalPlayer)
 end
 
